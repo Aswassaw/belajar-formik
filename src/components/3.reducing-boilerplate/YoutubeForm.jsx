@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -30,7 +30,7 @@ const YoutubeForm = () => {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <form className='form' onSubmit={formik.handleSubmit}>
+      <Form className='form'>
         <label htmlFor='name'>Name</label>
         <input
           type='text'
@@ -68,7 +68,7 @@ const YoutubeForm = () => {
         <button type='reset' onClick={formik.handleReset}>
           Reset
         </button>
-      </form>
+      </Form>
     </Formik>
   );
 };
