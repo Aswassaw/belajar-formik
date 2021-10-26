@@ -75,7 +75,7 @@ const YoutubeForm = () => {
       <label htmlFor='email'>Email</label>
       <input
         type='email'
-        email='email'
+        name='email'
         id='email'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -88,7 +88,7 @@ const YoutubeForm = () => {
       <label htmlFor='channel'>Channel</label>
       <input
         type='text'
-        channel='channel'
+        name='channel'
         id='channel'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
