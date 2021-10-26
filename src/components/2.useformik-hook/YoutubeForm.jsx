@@ -3,19 +3,22 @@ import { useFormik } from "formik";
 
 const YoutubeForm = () => {
   const formik = useFormik({
+    // Pastikan key sama dengan atribut name dan bukan id
     initialValues: {
-      // Pastikan key sama dengan atribut name dan bukan id
       name: "",
       email: "",
       channel: "",
     },
+    // onSubmit akan menerima values terbaru sebagai parameter pertamanya.
+    onSubmit: (values) => {
+      // e.preventDefault sudah otomatis diatasi oleh formik.
+      console.log(values);
+    },
   });
   const { name, email, channel } = formik.values;
 
-  console.log(formik.values);
-
   return (
-    <form className='form'>
+    <form className='form' onSubmit={formik.handleSubmit}>
       <label htmlFor='name'>Name</label>
       <input
         type='text'
@@ -44,6 +47,7 @@ const YoutubeForm = () => {
       />
 
       <button type='submit'>Submit</button>
+      <button type="reset" onClick={formik.handleReset}>Reset</button>
     </form>
   );
 };
