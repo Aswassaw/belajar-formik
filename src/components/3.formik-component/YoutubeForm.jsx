@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import TextError from "./TextError";
 
 const initialValues = {
   // Pastikan key sama dengan atribut name dan bukan id
@@ -38,17 +39,19 @@ const YoutubeForm = () => {
         <div>
           <label htmlFor='name'>Name</label>
           <Field type='text' name='name' id='name' />
-          <div className='error-msg'>
-            <ErrorMessage name='name' />
-          </div>
+          <ErrorMessage
+            name='name'
+            component={TextError}
+            placeholder='Input name'
+          />
         </div>
 
         <div>
           <label htmlFor='email'>Email</label>
           <Field type='email' name='email' id='email' />
-          <div className='error-msg'>
-            <ErrorMessage name='email' />
-          </div>
+          <ErrorMessage name='email'>
+            {(errorMsg) => <div className='error-msg'>{errorMsg}</div>}
+          </ErrorMessage>
         </div>
 
         <div>
@@ -79,9 +82,6 @@ const YoutubeForm = () => {
               </>
             )}
           </Field>
-          {/* <div className='error-msg'>
-            <ErrorMessage name='address' />
-          </div> */}
         </div>
 
         <button type='submit'>Submit</button>
