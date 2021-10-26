@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const initialValues = {
   // Pastikan key sama dengan atribut name dan bukan id
@@ -8,40 +9,51 @@ const initialValues = {
   channel: "",
 };
 
+// Validate with yup package
 const onSubmit = (values) => {
   // e.preventDefault sudah otomatis diatasi oleh formik.
   console.log(values);
 };
 
-const validate = (values) => {
-  let errors = {};
+// Manual validate
+// const validate = (values) => {
+//   let errors = {};
 
-  if (!values.name) {
-    errors.name = "Name tidak boleh kosong kawan!";
-  }
+//   if (!values.name) {
+//     errors.name = "Name tidak boleh kosong kawan!";
+//   }
 
-  if (!values.email) {
-    errors.email = "Email tidak boleh kosong kawan!";
-  } else if (
-    !/^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
-      values.email
-    )
-  ) {
-    errors.email = "Email anda tidak valid!";
-  }
+//   if (!values.email) {
+//     errors.email = "Email tidak boleh kosong kawan!";
+//   } else if (
+//     !/^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
+//       values.email
+//     )
+//   ) {
+//     errors.email = "Email anda tidak valid!";
+//   }
 
-  if (!values.channel) {
-    errors.channel = "Channel tidak boleh kosong kawan!";
-  }
+//   if (!values.channel) {
+//     errors.channel = "Channel tidak boleh kosong kawan!";
+//   }
 
-  return errors;
-};
+//   return errors;
+// };
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required!"),
+  email: Yup.string()
+    .required("Email is required!")
+    .email("Email is not valid!"),
+  channel: Yup.string().required("Channel is required!"),
+});
 
 const YoutubeForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    // validate,
+    validationSchema,
   });
   const { name, email, channel } = formik.values;
 
