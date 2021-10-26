@@ -7,6 +7,8 @@ const initialValues = {
   name: "",
   email: "",
   channel: "",
+  description: "",
+  address: "",
 };
 
 // Validate with yup package
@@ -16,6 +18,8 @@ const validationSchema = Yup.object({
     .required("Email is required!")
     .email("Email is not valid!"),
   channel: Yup.string().required("Channel is required!"),
+  description: Yup.string().max(150, "Description too long (max 150)!"),
+  address: Yup.string().required("Address is required!"),
 });
 
 const onSubmit = (values) => {
@@ -53,6 +57,31 @@ const YoutubeForm = () => {
           <div className='error-msg'>
             <ErrorMessage name='channel' />
           </div>
+        </div>
+
+        <div>
+          <label htmlFor='description'>Description</label>
+          <Field as='textarea' name='description' id='description' />
+          <div className='error-msg'>
+            <ErrorMessage name='description' />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor='address'>Address</label>
+          <Field name='address'>
+            {({ field, form, meta }) => (
+              <>
+                <input type='text' id='address' {...field} />
+                {meta.touched && meta.error && (
+                  <div className='error-msg'>{meta.error}</div>
+                )}
+              </>
+            )}
+          </Field>
+          {/* <div className='error-msg'>
+            <ErrorMessage name='address' />
+          </div> */}
         </div>
 
         <button type='submit'>Submit</button>
