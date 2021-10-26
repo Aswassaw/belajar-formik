@@ -1,19 +1,47 @@
 import React from "react";
 import { useFormik } from "formik";
 
+const initialValues = {
+  // Pastikan key sama dengan atribut name dan bukan id
+  name: "",
+  email: "",
+  channel: "",
+};
+
+const onSubmit = (values) => {
+  // e.preventDefault sudah otomatis diatasi oleh formik.
+  console.log(values);
+};
+
+const validate = (values) => {
+  let errors = {};
+
+  if (!values.name) {
+    errors.name = "Name tidak boleh kosong kawan!";
+  }
+
+  if (!values.email) {
+    errors.email = "Email tidak boleh kosong kawan!";
+  } else if (
+    !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
+      values.email
+    )
+  ) {
+    errors.email = "Email anda tidak valid!";
+  }
+
+  if (!values.channel) {
+    errors.channel = "Channel tidak boleh kosong kawan!";
+  }
+
+  return errors;
+};
+
 const YoutubeForm = () => {
   const formik = useFormik({
-    // Pastikan key sama dengan atribut name dan bukan id
-    initialValues: {
-      name: "",
-      email: "",
-      channel: "",
-    },
-    // onSubmit akan menerima values terbaru sebagai parameter pertamanya.
-    onSubmit: (values) => {
-      // e.preventDefault sudah otomatis diatasi oleh formik.
-      console.log(values);
-    },
+    initialValues,
+    onSubmit,
+    validate,
   });
   const { name, email, channel } = formik.values;
 
@@ -47,7 +75,9 @@ const YoutubeForm = () => {
       />
 
       <button type='submit'>Submit</button>
-      <button type="reset" onClick={formik.handleReset}>Reset</button>
+      <button type='reset' onClick={formik.handleReset}>
+        Reset
+      </button>
     </form>
   );
 };
