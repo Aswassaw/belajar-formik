@@ -23,7 +23,7 @@ const validate = (values) => {
   if (!values.email) {
     errors.email = "Email tidak boleh kosong kawan!";
   } else if (
-    !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
+    !/^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
       values.email
     )
   ) {
@@ -55,6 +55,7 @@ const YoutubeForm = () => {
         onChange={formik.handleChange}
         value={name}
       />
+      {formik.errors.name && <div className="error-msg">{formik.errors.name}</div>}
 
       <label htmlFor='email'>Email</label>
       <input
@@ -64,6 +65,7 @@ const YoutubeForm = () => {
         onChange={formik.handleChange}
         value={email}
       />
+      {formik.errors.email && <div className="error-msg">{formik.errors.email}</div>}
 
       <label htmlFor='channel'>Channel</label>
       <input
@@ -73,6 +75,7 @@ const YoutubeForm = () => {
         onChange={formik.handleChange}
         value={channel}
       />
+      {formik.errors.channel && <div className="error-msg">{formik.errors.channel}</div>}
 
       <button type='submit'>Submit</button>
       <button type='reset' onClick={formik.handleReset}>

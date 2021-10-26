@@ -20,6 +20,7 @@
 label {
   font-weight: bold;
   display: flex;
+  margin-top: 20px;
   margin-bottom: 5px;
 }
 
@@ -35,10 +36,14 @@ input[type="email"] {
   background-position: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 20px;
+}
+
+.error-msg {
+  color: rgb(231, 50, 50);
 }
 
 button {
+  margin-top: 20px;
   padding: 10px;
   outline: none;
   border: none;
