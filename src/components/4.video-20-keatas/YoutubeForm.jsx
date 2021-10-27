@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import TextError from "./TextError";
 
@@ -10,6 +10,7 @@ const initialValues = {
   channel: "",
   description: "",
   address: "",
+  skills: [""],
   social: {
     facebook: "",
     twitter: "",
@@ -96,7 +97,57 @@ const YoutubeForm = () => {
           </Field>
         </div>
 
-        <button type='button' onClick={() => setSocial((e) => !e)}>
+        <div>
+          <label htmlFor='skills'>Skills</label>
+          <FieldArray type='text' name='skills' id='skills'>
+            {({
+              push,
+              remove,
+              form: {
+                values: { skills },
+              },
+            }) => {
+              return (
+                <>
+                  {skills.map((skill, index) => (
+                    <div className='flex-arr' key={index}>
+                      <Field className='input-arr' name={`skills[${index}]`} />
+                      {index === 0 && (
+                        <button
+                          className='btn-arr'
+                          type='button'
+                          onClick={() => push("")}
+                        >
+                          +
+                        </button>
+                      )}
+                      {skills.length > 1 && (
+                        <button
+                          className='btn-arr'
+                          type='button'
+                          onClick={() => remove(index)}
+                        >
+                          -
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </>
+              );
+            }}
+          </FieldArray>
+          <ErrorMessage
+            name='skills'
+            component={TextError}
+            placeholder='Input skills'
+          />
+        </div>
+
+        <button
+          className='button'
+          type='button'
+          onClick={() => setSocial((e) => !e)}
+        >
           {!social ? "Add Social" : "Close"}
         </button>
         <br />
@@ -116,7 +167,11 @@ const YoutubeForm = () => {
           </>
         )}
 
-        <button type='button' onClick={() => setPhone((e) => !e)}>
+        <button
+          className='button'
+          type='button'
+          onClick={() => setPhone((e) => !e)}
+        >
           {!phone ? "Add Phone" : "Close"}
         </button>
         <br />
@@ -136,8 +191,12 @@ const YoutubeForm = () => {
           </>
         )}
 
-        <button type='submit'>Submit</button>
-        <button type='reset'>Reset</button>
+        <button className='button' type='submit'>
+          Submit
+        </button>
+        <button className='button' type='reset'>
+          Reset
+        </button>
       </Form>
     </Formik>
   );
