@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FastField,
+} from "formik";
 import * as Yup from "yup";
 import TextError from "./TextError";
 
@@ -47,6 +54,8 @@ const YoutubeForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      // validateOnChange={false}
+      // validateOnBlur={false}
     >
       <Form className='form'>
         <div>
@@ -95,7 +104,7 @@ const YoutubeForm = () => {
                     <div className='error-msg'>{meta.error}</div>
                   )}
                 </>
-              )
+              );
             }}
           </FastField>
         </div>
@@ -108,8 +117,10 @@ const YoutubeForm = () => {
               remove,
               form: {
                 values: { skills },
+                errors,
               },
             }) => {
+              console.log(errors);
               return (
                 <>
                   {skills.map((skill, index) => (
