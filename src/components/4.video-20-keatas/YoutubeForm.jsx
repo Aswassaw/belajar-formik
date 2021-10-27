@@ -31,14 +31,18 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .required("Email is required!")
     .email("Email is not valid!"),
-  channel: Yup.string().required("Channel is required!"),
   description: Yup.string().max(150, "Description too long (max 150)!"),
   address: Yup.string().required("Address is required!"),
-  // social: {
-  //   facebook: Yup.string().notRequired().url("Facebook url is not valid!"),
-  //   twitter: Yup.string().notRequired().url("Twitter url is not valid!"),
-  // },
 });
+
+// Manual validate
+const validateChannel = value => {
+  let error = null;
+  if(!value) {
+    error = "Channel is required!"
+  }
+  return error
+}
 
 const onSubmit = (values) => {
   // e.preventDefault sudah otomatis diatasi oleh formik
@@ -78,7 +82,7 @@ const YoutubeForm = () => {
 
         <div>
           <label htmlFor='channel'>Channel</label>
-          <Field type='text' name='channel' id='channel' />
+          <Field type='text' name='channel' id='channel' validate={validateChannel} />
           <div className='error-msg'>
             <ErrorMessage name='channel' />
           </div>
@@ -96,7 +100,6 @@ const YoutubeForm = () => {
           <label htmlFor='address'>Address</label>
           <FastField name='address'>
             {({ field, form, meta }) => {
-              console.log("Field Address");
               return (
                 <>
                   <input type='text' id='address' {...field} />
@@ -120,7 +123,6 @@ const YoutubeForm = () => {
                 errors,
               },
             }) => {
-              console.log(errors);
               return (
                 <>
                   {skills.map((skill, index) => (
