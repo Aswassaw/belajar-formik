@@ -14,6 +14,7 @@ const initialValues = {
     facebook: "",
     twitter: "",
   },
+  phone: ["", ""],
 };
 
 // Validate with yup package
@@ -38,6 +39,7 @@ const onSubmit = (values) => {
 
 const YoutubeForm = () => {
   const [social, setSocial] = useState(false);
+  const [phone, setPhone] = useState(false);
 
   return (
     <Formik
@@ -110,6 +112,26 @@ const YoutubeForm = () => {
               <label htmlFor='twitter'>Twitter</label>
               <Field type='text' name='social.twitter' id='twitter' />
               <ErrorMessage name='social.twitter' component={TextError} />
+            </div>
+          </>
+        )}
+
+        <button type='button' onClick={() => setPhone((e) => !e)}>
+          {!phone ? "Add Phone" : "Close"}
+        </button>
+        <br />
+
+        {phone && (
+          <>
+            <div>
+              <label htmlFor='phone1'>Phone 1</label>
+              <Field type='number' name='phone[0]' id='phone1' />
+              <ErrorMessage name='phone[0]' component={TextError} />
+            </div>
+            <div>
+              <label htmlFor='phone2'>Phone 2</label>
+              <Field type='number' name='phone[1]' id='phone2' />
+              <ErrorMessage name='phone[1]' component={TextError} />
             </div>
           </>
         )}
