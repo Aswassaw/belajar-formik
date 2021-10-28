@@ -18,6 +18,8 @@ const initialValues = {
   description: "",
   address: "",
   skills: [""],
+  password: "",
+  passwordConfirm: "",
   social: {
     facebook: "",
     twitter: "",
@@ -25,14 +27,35 @@ const initialValues = {
   phone: ["", ""],
 };
 
+const emailFromDB = ["aswassaw227@gmail.com", "andrypeb227@gmail.com"];
+
+const lowercaseRegex = /(?=.*[a-z])/;
+const uppercaseRegex = /(?=.*[A-Z])/;
+const numericRegex = /(?=.*[0-9])/;
+
 // Validate with yup package
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required!"),
   email: Yup.string()
     .required("Email is required!")
-    .email("Email is not valid!"),
+    .email("Email is not valid!")
+    .lowercase()
+    .notOneOf(emailFromDB, "Email already taken!"),
   description: Yup.string().max(150, "Description too long (max 150)!"),
-  address: Yup.string().required("Address is required!"),
+  address: Yup.string()
+    .required("Address is required!")
+    .matches(/Trenggalek/i, "Address must be contain 'Trenggalek'"),
+  password: Yup.string()
+    .required("Password is required")
+    .matches(lowercaseRegex, "One lowercase character required")
+    .matches(uppercaseRegex, "One uppercase character required")
+    .matches(numericRegex, "One number required"),
+  passwordConfirm: Yup.string()
+    .required("Password confirm is required")
+    .oneOf(
+      [Yup.ref("password")],
+      "Password confirm harus sama dengan password"
+    ),
   social: Yup.object({
     facebook: Yup.string().url("Facebook is not valid url!"),
     twitter: Yup.string().url("Twitter is not valid url!"),
@@ -173,6 +196,30 @@ const YoutubeForm = () => {
                 name='skills'
                 component={TextError}
                 placeholder='Input skills'
+              />
+            </div>
+
+            <div>
+              <label htmlFor='password'>Password</label>
+              <Field type='password' name='password' id='password' />
+              <ErrorMessage
+                name='password'
+                component={TextError}
+                placeholder='Input password'
+              />
+            </div>
+
+            <div>
+              <label htmlFor='passwordConfirm'>Password confirm</label>
+              <Field
+                type='password'
+                name='passwordConfirm'
+                id='passwordConfirm'
+              />
+              <ErrorMessage
+                name='passwordConfirm'
+                component={TextError}
+                placeholder='Input password confirm'
               />
             </div>
 
