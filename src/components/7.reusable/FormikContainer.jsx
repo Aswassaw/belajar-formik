@@ -16,10 +16,19 @@ const FormikContainer = () => {
     description: Yup.string()
       .required("Description is required!")
       .max(100, "Description too long (max 100)!"),
+    education: Yup.string().required("Education is required"),
   });
   const onSubmit = (values) => {
     console.log(values);
   };
+
+  // Options for education select field
+  const educationOptions = [
+    { value: "", text: "Select an option" },
+    { value: "Sekolah Dasar", text: "Sekolah Dasar" },
+    { value: "Sekolah Menengah Pertama", text: "Sekolah Menengah Pertama" },
+    { value: "Sekolah Menengah Atas", text: "Sekolah Menengah Atas" },
+  ];
 
   return (
     <Formik
@@ -40,6 +49,12 @@ const FormikContainer = () => {
               control='textarea'
               label='Description'
               name='description'
+            />
+            <FormikControl
+              control='select'
+              label='Education'
+              name='education'
+              options={educationOptions}
             />
             <button className='button' type='submit'>
               Submit
