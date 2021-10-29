@@ -71,9 +71,12 @@ const validateChannel = (value) => {
   return error;
 };
 
-const onSubmit = (values) => {
-  // e.preventDefault sudah otomatis diatasi oleh formik
+const onSubmit = (values, onSubmitProps) => {
   console.log(values);
+
+  setTimeout(() => {
+    onSubmitProps.setSubmitting(false);
+  }, 5000);
 };
 
 const YoutubeForm = () => {
@@ -90,7 +93,7 @@ const YoutubeForm = () => {
       // validateOnMount
     >
       {(formik) => {
-        console.log(formik);
+        // console.log(formik);
 
         return (
           <Form className='form'>
@@ -310,11 +313,13 @@ const YoutubeForm = () => {
             <br />
 
             <button
-              className={`button ${!formik.isValid && "disabled"}`}
+              className={`button ${
+                !formik.isValid || formik.isSubmitting ? "disabled" : ""
+              }`}
               type='submit'
-              disabled={!formik.isValid}
+              disabled={!formik.isValid || formik.isSubmitting ? true : false}
             >
-              Submit
+              {!formik.isSubmitting ? "Submit" : "Processing..."}
             </button>
             <button className='button' type='reset'>
               Reset
