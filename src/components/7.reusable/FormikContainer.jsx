@@ -8,7 +8,9 @@ const FormikContainer = () => {
   const initialValues = {
     email: "",
     description: "",
+    education: "",
     favColor: "",
+    favFood: [],
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -18,7 +20,8 @@ const FormikContainer = () => {
       .required("Description is required!")
       .max(100, "Description too long (max 100)!"),
     education: Yup.string().required("Education is required!"),
-    favColor: Yup.string().required("Favourite Color is required!"),
+    favColor: Yup.string().required("Favourite color is required!"),
+    favFood: Yup.array().min(1, "Favourite food is required"),
   });
   const onSubmit = (values, onSubmitProps) => {
     console.log(values);
@@ -47,11 +50,18 @@ const FormikContainer = () => {
     },
   ];
 
-  // Options for isMarried select field
+  // Options for favColor radio field
   const colorOptions = [
     { key: "red", value: "Red" },
     { key: "green", value: "Green" },
     { key: "blue", value: "Blue" },
+  ];
+
+  // Options for favFood checkbox filed
+  const foodOptions = [
+    { key: "nasi-goreng", value: "Nasi Goreng" },
+    { key: "soto-ayam", value: "Soto Ayam" },
+    { key: "bakso-daging", value: "Bakso Daging" },
   ];
 
   return (
@@ -82,9 +92,15 @@ const FormikContainer = () => {
             />
             <FormikControl
               control='radio'
-              label='Favourite Color'
+              label='Favourite color'
               name='favColor'
               options={colorOptions}
+            />
+            <FormikControl
+              control='checkbox'
+              label='Favourite food'
+              name='favFood'
+              options={foodOptions}
             />
 
             <button
