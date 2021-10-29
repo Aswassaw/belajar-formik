@@ -7,11 +7,15 @@ import FormikControl from "./FormikControl";
 const FormikContainer = () => {
   const initialValues = {
     email: "",
+    description: "",
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Email is required!")
       .email("Email is not valid!"),
+    description: Yup.string()
+      .required("Description is required!")
+      .max(100, "Description too long (max 100)!"),
   });
   const onSubmit = (values) => {
     console.log(values);
@@ -31,6 +35,11 @@ const FormikContainer = () => {
               label='Email'
               name='email'
               type='email'
+            />
+            <FormikControl
+              control='textarea'
+              label='Description'
+              name='description'
             />
             <button className='button' type='submit'>
               Submit

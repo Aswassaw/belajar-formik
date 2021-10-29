@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
-import TextError from "./TextError";
+import TextError from "./error/TextError";
 
 const Input = ({ label, name, ...rest }) => {
   return (
