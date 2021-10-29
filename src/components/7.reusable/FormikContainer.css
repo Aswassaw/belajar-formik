@@ -1,5 +1,5 @@
 .form {
-  max-width: 600px;
+  width: 500px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 40px;
   border-radius: 8px;
@@ -14,7 +14,7 @@
 
 .form-input {
   display: block;
-  width: 95%;
+  width: 100%;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.4;
