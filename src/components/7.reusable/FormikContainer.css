@@ -1,31 +1,18 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-.App {
-  display: flex;
-  justify-content: center;
-  margin: 40px;
-}
-
-/* .form {
+.form {
   max-width: 600px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 40px;
   border-radius: 8px;
 }
 
-label {
+.form-label {
   font-weight: bold;
   display: flex;
   margin-top: 20px;
   margin-bottom: 5px;
 }
 
-input,
-textarea {
+.form-input {
   display: block;
   width: 300px;
   padding: 6px 12px;
@@ -38,7 +25,7 @@ textarea {
   border-radius: 4px;
 }
 
-.error-msg {
+.error {
   color: rgb(231, 50, 50);
 }
 
@@ -57,25 +44,3 @@ textarea {
 .disabled {
   background-color: rgb(53, 95, 134);
 }
-
-.flex-arr {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.input-arr {
-  margin-bottom: 5px;
-}
-
-.btn-arr {
-  padding: 10px;
-  outline: none;
-  border: none;
-  background-color: rgb(36, 114, 187);
-  font-weight: bold;
-  color: white;
-  margin-right: 5px;
-  margin-left: 5px;
-  cursor: pointer;
-} */
