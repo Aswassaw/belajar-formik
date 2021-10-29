@@ -12,10 +12,11 @@ const Select = ({ label, name, options, ...rest }) => {
       {/* Field */}
       <Field className='form-input' id={name} name={name} {...rest} as='select'>
         {/* Options */}
-        {options.map((option, index) => {
+        <option value=''>Select an option</option>
+        {options.map(({ key, value, text }) => {
           return (
-            <option key={index} value={option.value}>
-              {option.text}
+            <option key={key} value={value}>
+              {text || value}
             </option>
           );
         })}

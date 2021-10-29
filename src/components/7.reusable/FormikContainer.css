@@ -25,6 +25,10 @@
   border-radius: 4px;
 }
 
+.radio {
+  margin: 3px 5px 3px 5px;
+}
+
 .error {
   color: rgb(231, 50, 50);
 }
@@ -43,4 +47,5 @@
 
 .disabled {
   background-color: rgb(53, 95, 134);
+  cursor: not-allowed;
 }
