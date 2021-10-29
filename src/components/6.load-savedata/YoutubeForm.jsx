@@ -334,12 +334,11 @@ const YoutubeForm = () => {
             <button
               type='button'
               className='button'
-              onClick={() => {
-                setFormValues(initialValuesFromApi);
-              }}
+              onClick={() => setFormValues(initialValuesFromApi)}
             >
               Load Data
             </button>
+            <button className="button" type="button" onClick={() => formik.resetForm()}>Reset</button>
             <br />
 
             <button
