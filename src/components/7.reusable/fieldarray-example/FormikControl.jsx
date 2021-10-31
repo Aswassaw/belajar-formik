@@ -11,6 +11,8 @@ const FormikControl = ({ control, ...rest }) => {
   switch (control) {
     case "input":
       return <Input {...rest} />;
+    case "input-array":
+      return <InputArray {...rest} />;
     case "textarea":
       return <Textarea {...rest} />;
     case "select":

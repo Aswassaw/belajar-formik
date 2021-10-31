@@ -12,6 +12,7 @@ const FormikContainer = () => {
     skills: [
       {
         skillName: "",
+        skillRate: 0,
       },
     ],
     favColor: "",
@@ -26,6 +27,12 @@ const FormikContainer = () => {
       .required("Description is required!")
       .max(100, "Description too long (max 100)!"),
     education: Yup.string().required("Education is required!"),
+    skills: Yup.array().of(
+      Yup.object().shape({
+        skillName: Yup.string().required("Skill Name is required!"),
+        skillRate: Yup.number().required("Skill Rate is required!"),
+      })
+    ),
     favColor: Yup.string().required("Favourite color is required!"),
     favFood: Yup.array().min(1, "Favourite food is required"),
     birthDate: Yup.date().required("Birth Date is required!").nullable(),
@@ -106,7 +113,15 @@ const FormikContainer = () => {
               control='input-array'
               label='Skills'
               name='skills'
-              type='text'
+              attributeChild={[
+                { name: "skillName", placeholder: "Skill Name", type: "text" },
+                {
+                  name: "skillRate",
+                  placeholder: "Skill Rate",
+                  type: "number",
+                  max: 100,
+                },
+              ]}
             />
             <FormikControl
               control='radio'
