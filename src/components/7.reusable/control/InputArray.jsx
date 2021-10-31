@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Field, FieldArray, ErrorMessage } from "formik";
+import { nanoid } from "nanoid";
 import TextError from "./error/TextError";
 
-const InputArray = ({ label, name, ...rest }) => {
+const InputArray = ({ label, name, attributeChild, ...rest }) => {
   return (
     <div>
       {/* Label */}
@@ -11,50 +12,57 @@ const InputArray = ({ label, name, ...rest }) => {
       </label>
       {/* Field Array */}
       <FieldArray name={name} id={name}>
-        {({
-          push,
-          remove,
-          form: {
-            values: { skills },
-            errors,
-          },
-        }) => {
+        {({ push, remove, form: { values, errors } }) => {
           return (
             <>
-              {skills.map((skill, index) => (
-                <div className='flex' key={index}>
-                  {/* Field */}
-                  <Field
-                    className='form-input mb-5'
-                    name={`skills.${index}.skillName`}
-                    {...rest}
-                  />
-                  {index === 0 && (
-                    <button
-                      className='button-array'
-                      type='button'
-                      onClick={() => push("")}
-                    >
-                      +
-                    </button>
-                  )}
-                  {skills.length > 1 && (
-                    <button
-                      className='button-array'
-                      type='button'
-                      onClick={() => remove(index)}
-                    >
-                      -
-                    </button>
-                  )}
-                </div>
-              ))}
+              {values[name].map((value, index) => {
+                return attributeChild.map((attrC, indexC) => {
+                  const { name: attrCName, ...attrCRest } = attrC;
+                  return (
+                    <Fragment key={nanoid()}>
+                      <div className='flex'>
+                        {/* Field */}
+                        <Field
+                          className='form-input mb-5'
+                          name={`${name}.${index}.${attrCName}`}
+                          {...attrCRest}
+                        />
+                        {indexC === 0 && (
+                          <>
+                            {index === 0 && (
+                              <button
+                                className='button-array'
+                                type='button'
+                                onClick={() => push("")}
+                              >
+                                +
+                              </button>
+                            )}
+                            {values[name].length > 1 && (
+                              <button
+                                className='button-array'
+                                type='button'
+                                onClick={() => remove(index)}
+                              >
+                                -
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </div>
+                      {/* Error */}
+                      <ErrorMessage
+                        name={`${name}.${index}.${attrCName}`}
+                        component={TextError}
+                      />
+                    </Fragment>
+                  );
+                });
+              })}
             </>
           );
         }}
       </FieldArray>
-      {/* Error */}
-      <ErrorMessage name={name} component={TextError} />
     </div>
   );
 };

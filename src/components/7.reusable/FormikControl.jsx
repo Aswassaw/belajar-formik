@@ -1,11 +1,11 @@
 import React from "react";
 import Input from "./control/Input";
+import InputArray from "./control/InputArray";
 import Textarea from "./control/Textarea";
 import Select from "./control/Select";
 import Radio from "./control/Radio";
 import Checkbox from "./control/Checkbox";
 import Datepicker from "./control/Datepicker";
-import InputArray from "./control/InputArray";
 
 const FormikControl = ({ control, ...rest }) => {
   switch (control) {

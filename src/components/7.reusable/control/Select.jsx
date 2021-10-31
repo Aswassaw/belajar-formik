@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
+import { nanoid } from 'nanoid'
 import TextError from "./error/TextError";
 
 const Select = ({ label, name, options, ...rest }) => {
@@ -15,7 +16,7 @@ const Select = ({ label, name, options, ...rest }) => {
         <option value=''>Select an option</option>
         {options.map(({ label, value }) => {
           return (
-            <option key={label} value={value}>
+            <option key={nanoid()} value={value}>
               {label}
             </option>
           );

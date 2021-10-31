@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Field, ErrorMessage } from "formik";
+import { nanoid } from 'nanoid'
 import TextError from "./error/TextError";
 
 const Checkbox = ({ label, name, options, ...rest }) => {
@@ -15,7 +16,7 @@ const Checkbox = ({ label, name, options, ...rest }) => {
         {({ field }) => {
           return options.map(({ label, value }) => {
             return (
-              <Fragment key={label}>
+              <Fragment key={nanoid()}>
                 <input
                   className='checkbox'
                   type='checkbox'
