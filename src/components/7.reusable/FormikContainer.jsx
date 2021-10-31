@@ -11,6 +11,7 @@ const FormikContainer = () => {
     education: "",
     favColor: "",
     favFood: [],
+    birthDate: null,
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -22,9 +23,18 @@ const FormikContainer = () => {
     education: Yup.string().required("Education is required!"),
     favColor: Yup.string().required("Favourite color is required!"),
     favFood: Yup.array().min(1, "Favourite food is required"),
+    birthDate: Yup.date().required("Birth Date is required!").nullable(),
   });
   const onSubmit = (values, onSubmitProps) => {
     console.log(values);
+
+    // Mengubah object date ke string
+    const birthDateString = JSON.parse(JSON.stringify(values.birthDate));
+    console.log(birthDateString);
+
+    // Mengubah string date ke object
+    const birthDateBack = new Date(birthDateString);
+    console.log(birthDateBack);
 
     setTimeout(() => {
       onSubmitProps.setSubmitting(false);
@@ -101,6 +111,11 @@ const FormikContainer = () => {
               label='Favourite food'
               name='favFood'
               options={foodOptions}
+            />
+            <FormikControl
+              control='datepicker'
+              label='Birth Date'
+              name='birthDate'
             />
 
             <button

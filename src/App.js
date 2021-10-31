@@ -1,14 +1,14 @@
 import "./App.css";
-import RegisterForm from "./components/8.project/RegisterForm";
+// import RegisterForm from "./components/8.project/RegisterForm";
+import FormikContainer from "./components/7.reusable/FormikContainer";
 // import LoginForm from "./components/8.project/LoginForm";
-// import FormikContainer from "./components/7.reusable/FormikContainer";
 
 function App() {
   return (
     <div className='App'>
-      {/* <FormikContainer /> */}
+      <FormikContainer />
       {/* <LoginForm /> */}
-      <RegisterForm />
+      {/* <RegisterForm /> */}
     </div>
   );
 }
