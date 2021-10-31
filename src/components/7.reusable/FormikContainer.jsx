@@ -9,6 +9,11 @@ const FormikContainer = () => {
     email: "",
     description: "",
     education: "",
+    skills: [
+      {
+        skillName: "",
+      },
+    ],
     favColor: "",
     favFood: [],
     birthDate: null,
@@ -44,34 +49,31 @@ const FormikContainer = () => {
   // Options for education select field
   const educationOptions = [
     {
-      key: "sekolah-dasar",
-      value: "Sekolah Dasar",
-      text: "SD (Sekolah Dasar)",
+      label: "Sekolah Dasar",
+      value: "sd",
     },
     {
-      key: "sekolah-menengah-pertama",
-      value: "Sekolah Menengah Pertama",
-      text: "SMP (Sekolah Menengah Pertama)",
+      label: "Sekolah Menengah Pertama",
+      value: "smp",
     },
     {
-      key: "sekolah-menengah-atas",
-      value: "Sekolah Menengah Atas",
-      text: "SMA (Sekolah Menengah Atas)",
+      label: "Sekolah Menengah Atas",
+      value: "sma",
     },
   ];
 
   // Options for favColor radio field
   const colorOptions = [
-    { key: "red", value: "Red" },
-    { key: "green", value: "Green" },
-    { key: "blue", value: "Blue" },
+    { value: "red", label: "Red" },
+    { value: "green", label: "Green" },
+    { value: "blue", label: "Blue" },
   ];
 
   // Options for favFood checkbox filed
   const foodOptions = [
-    { key: "nasi-goreng", value: "Nasi Goreng" },
-    { key: "soto-ayam", value: "Soto Ayam" },
-    { key: "bakso-daging", value: "Bakso Daging" },
+    { value: "nasiGoreng", label: "Nasi Goreng" },
+    { value: "sotoAyam", label: "Soto Ayam" },
+    { value: "baksoDaging", label: "Bakso Daging" },
   ];
 
   return (
@@ -99,6 +101,12 @@ const FormikContainer = () => {
               label='Education'
               name='education'
               options={educationOptions}
+            />
+            <FormikControl
+              control='input-array'
+              label='Skills'
+              name='skills'
+              type='text'
             />
             <FormikControl
               control='radio'

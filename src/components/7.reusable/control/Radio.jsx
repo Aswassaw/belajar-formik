@@ -13,18 +13,18 @@ const Radio = ({ label, name, options, ...rest }) => {
       <Field className='form-input' id={name} name={name} {...rest}>
         {/* Options */}
         {({ field }) => {
-          return options.map(({ key, value, text }) => {
+          return options.map(({ label, value }) => {
             return (
-              <Fragment key={key}>
+              <Fragment key={label}>
                 <input
                   className='radio'
                   type='radio'
-                  id={key}
+                  id={value}
                   {...field}
                   value={value}
                   checked={field.value === value}
                 />
-                <label htmlFor={key}>{text || value}</label>
+                <label htmlFor={value}>{label}</label>
               </Fragment>
             );
           });

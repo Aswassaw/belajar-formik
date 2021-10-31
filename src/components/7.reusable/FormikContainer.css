@@ -49,3 +49,25 @@
   background-color: rgb(53, 95, 134);
   cursor: not-allowed;
 }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.button-array {
+  padding: 10px;
+  outline: none;
+  border: none;
+  background-color: rgb(36, 114, 187);
+  font-weight: bold;
+  color: white;
+  margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
