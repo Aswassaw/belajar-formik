@@ -1,6 +1,5 @@
 import React from "react";
 import Input from "./control/Input";
-import InputArray from "./control/InputArray";
 import Textarea from "./control/Textarea";
 import Select from "./control/Select";
 import Radio from "./control/Radio";
