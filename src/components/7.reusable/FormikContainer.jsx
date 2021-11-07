@@ -9,11 +9,7 @@ const FormikContainer = () => {
     email: "",
     description: "",
     education: "",
-    skills: [
-      {
-        skillName: "",
-      },
-    ],
+    skills: [],
     favColor: "",
     favFood: [],
     birthDate: null,
@@ -26,8 +22,9 @@ const FormikContainer = () => {
       .required("Description is required!")
       .max(100, "Description too long (max 100)!"),
     education: Yup.string().required("Education is required!"),
+    skills: Yup.array().min(1, "Skills is required!"),
     favColor: Yup.string().required("Favourite color is required!"),
-    favFood: Yup.array().min(1, "Favourite food is required"),
+    favFood: Yup.array().min(1, "Favourite food is required!"),
     birthDate: Yup.date().required("Birth Date is required!").nullable(),
   });
   const onSubmit = (values, onSubmitProps) => {
@@ -59,6 +56,26 @@ const FormikContainer = () => {
     {
       label: "Sekolah Menengah Atas",
       value: "sma",
+    },
+  ];
+
+  // Options for education select field
+  const skillsOptions = [
+    {
+      label: "HTML",
+      value: "html",
+    },
+    {
+      label: "CSS",
+      value: "css",
+    },
+    {
+      label: "Javascript",
+      value: "js",
+    },
+    {
+      label: "PHP",
+      value: "php",
     },
   ];
 
@@ -103,10 +120,11 @@ const FormikContainer = () => {
               options={educationOptions}
             />
             <FormikControl
-              control='input-array'
+              control='select'
               label='Skills'
               name='skills'
-              type='text'
+              options={skillsOptions}
+              multiple
             />
             <FormikControl
               control='radio'
